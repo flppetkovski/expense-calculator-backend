@@ -2,18 +2,38 @@ const express = require("express")
 const router = new express.Router()
 const Product = require("../models/product")
 const auth = require("../middleware/auth")
+const sharp = require("sharp")
 
 router.get("/products", auth, async (req, res) => {
 
+ const sort = {}
 
+ const match = {
+
+ }
+
+ if (req.query.sortBy) {
+  const parts = req.query.sortBy.split(":")
+  sort[[parts[0]]] = parts[1] === "desc" ? -1 : 1
+ }
 
  try {
-  await req.user.populate("products").execPopulate()
+  await req.user.populate({
+   path: "products",
+   match,
+   options: {
+    limit: parseInt(req.query.limit),
+    skip: parseInt(req.query.skip),
+    sort
+   }
+  }).execPopulate()
   res.send(req.user.products)
  } catch (e) {
   res.status(500).send()
  }
 });
+
+
 
 router.patch("/products/:id", auth, async (req, res) => {
  const updates = Object.keys(req.body)
@@ -49,6 +69,7 @@ router.patch("/products/:id", auth, async (req, res) => {
 
 
 })
+
 router.delete("/products/:id", auth, async (req, res) => {
 
 

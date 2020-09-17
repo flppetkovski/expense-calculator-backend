@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Task = require("../models/product")
+const Product = require("../models/product")
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
       required: true,
     },
   }, ],
+  avatar: {
+    type: Buffer
+  },
+}, {
+  timestamps: true
 });
 
 
@@ -65,6 +70,7 @@ userSchema.methods.toJSON = function () {
   const userObject = user.toObject()
   delete userObject.password
   delete userObject.tokens
+  delete userObject.avatar
 
   return userObject
 }
@@ -97,7 +103,7 @@ userSchema.pre("save", async function (next) {
 
 userSchema.pre("remove", async function (next) {
   const user = this
-  await Task.deleteMany({
+  await Product.deleteMany({
     owner: user._id
   })
 
