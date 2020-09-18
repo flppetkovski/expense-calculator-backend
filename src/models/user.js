@@ -1,79 +1,85 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Product = require("../models/product")
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  surname: {
-    type: String,
-    trim: true,
-
-    // required: true
-  },
-  birthday: {
-    type: Date,
-  },
-  email: {
-    type: String,
-    lowercase: true,
-    trim: true,
-    unique: true,
-    // required: true
-  },
-  phone: {
-    type: String,
-  },
-  password: {
-    type: String,
-    minlength: 7,
-    // required: true
-  },
-  tokens: [{
-    token: {
+const Product = require("../models/product");
+const userSchema = new mongoose.Schema(
+  {
+    name: {
       type: String,
       required: true,
+      trim: true,
     },
-  }, ],
-  avatar: {
-    type: Buffer
-  },
-}, {
-  timestamps: true
-});
+    surname: {
+      type: String,
+      trim: true,
 
+      required: true,
+    },
+    birthday: {
+      type: Date,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      trim: true,
+      unique: true,
+      required: true,
+    },
+    phone: {
+      type: String,
+    },
+    password: {
+      type: String,
+      minlength: 7,
+      required: true,
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    avatar: {
+      type: Buffer,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.virtual("products", {
   ref: "Product",
   localField: "_id",
-  foreignField: "owner"
-
-})
+  foreignField: "owner",
+});
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({
-    _id: user.id.toString()
-  }, process.env.JWT_SECRET);
+  const token = jwt.sign(
+    {
+      _id: user.id.toString(),
+    },
+    process.env.JWT_SECRET
+  );
   user.tokens = user.tokens.concat({
-    token
+    token,
   });
   await user.save();
   return token;
 };
 
 userSchema.methods.toJSON = function () {
-  const user = this
-  const userObject = user.toObject()
-  delete userObject.password
-  delete userObject.tokens
-  delete userObject.avatar
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+  delete userObject.tokens;
+  delete userObject.avatar;
 
-  return userObject
-}
+  return userObject;
+};
 
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({
@@ -102,13 +108,13 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.pre("remove", async function (next) {
-  const user = this
+  const user = this;
   await Product.deleteMany({
-    owner: user._id
-  })
+    owner: user._id,
+  });
 
-  next()
-})
+  next();
+});
 
 const User = mongoose.model("User", userSchema);
 
