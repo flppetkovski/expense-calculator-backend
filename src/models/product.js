@@ -10,7 +10,6 @@ const productSchema = new mongoose.Schema({
   type: String,
   trim: true,
 
-  // required: true
  },
 
  type: {
@@ -19,6 +18,8 @@ const productSchema = new mongoose.Schema({
  },
  price: {
   type: Number,
+  required: true
+
  },
  date: {
   type: Date,
