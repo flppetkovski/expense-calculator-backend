@@ -107,7 +107,7 @@ const upload = multer({
     filesize: 2500000,
   },
   fileFilter(req, file, cb) {
-    if (!file.filename.endsWith("png" || "jpg" || "jpeg")) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return cb(new Error("Please upload a png, jpg or jpeg file image"));
     }
     cb(undefined, true);
