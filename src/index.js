@@ -12,7 +12,12 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    allowedHeaders: ["sessionId", "Content-Type"],
+    allowedHeaders: [
+      "sessionId",
+      "authorization",
+      "Authorization",
+      "Content-Type",
+    ],
     exposedHeaders: ["sessionId"],
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
