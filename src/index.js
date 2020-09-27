@@ -17,6 +17,7 @@ app.use(
       "authorization",
       "Authorization",
       "Content-Type",
+      "Access-Control-Allow-Origin",
     ],
     exposedHeaders: ["sessionId"],
     origin: "*",
