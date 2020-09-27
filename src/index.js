@@ -10,7 +10,15 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    allowedHeaders: ["sessionId", "Content-Type"],
+    exposedHeaders: ["sessionId"],
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+  })
+);
 
 app.use(express.json());
 app.use(userRouter);
