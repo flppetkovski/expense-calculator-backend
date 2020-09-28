@@ -116,7 +116,6 @@ const upload = multer({
 });
 
 router.post(
-  res.set(("origin", "null")),
   "/users/me/avatar",
   auth,
   upload.single("avatar"),
