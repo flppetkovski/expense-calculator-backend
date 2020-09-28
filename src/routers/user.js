@@ -115,11 +115,8 @@ const upload = multer({
   },
 });
 
-router.options("/users/me/avatar", cors({ origin: "null" }));
-
 router.post(
   "/users/me/avatar",
-  cors(),
   auth,
   upload.single("avatar"),
   async (req, res) => {
