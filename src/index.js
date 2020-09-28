@@ -11,7 +11,13 @@ const app = express();
 const port = process.env.PORT;
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      "*",
+      "https://petkovski-expense-calculator.netlify.app",
+      "https://petkovski-expense-calculator.netlify.app/users/me/avatar",
+    ],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 

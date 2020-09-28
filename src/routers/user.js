@@ -115,6 +115,8 @@ const upload = multer({
   },
 });
 
+  
+
 router.post(
   "/users/me/avatar",
   auth,
