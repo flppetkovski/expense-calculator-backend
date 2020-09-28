@@ -12,10 +12,7 @@ const port = process.env.PORT;
 // app.use(cors({ origin: "*" }));
 app.use((req, res, next) => {
   res.append("Access-Control-Allow-Origin", [
-    "*",
-    "null",
-    "http://localhost:3000",
-    "http://localhost:3000",
+    "https://petkovski-expense-calculator.netlify.app",
   ]);
   res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.append("Access-Control-Allow-Headers", "Content-Type");
