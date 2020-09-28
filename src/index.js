@@ -21,6 +21,7 @@ app.use(
     ],
     exposedHeaders: ["sessionId"],
     origin: "*",
+    "Access-Control-Allow-Origin": "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
   })
