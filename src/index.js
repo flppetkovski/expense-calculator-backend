@@ -11,19 +11,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(
-  cors({
-    allowedHeaders: [
-      "sessionId",
-      "authorization",
-      "Authorization",
-      "Content-Type",
-      "Access-Control-Allow-Origin",
-    ],
-    exposedHeaders: ["sessionId"],
-    origin: "*",
-    "Access-Control-Allow-Origin": "http://localhost:3000",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
+  cors(cors({ origin: 'null', credentials: true }
   })
 );
 
