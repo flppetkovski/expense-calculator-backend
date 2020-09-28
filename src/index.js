@@ -10,7 +10,12 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.use(cors({ origin: "*" }));
+app.use((req, res, next) => {
+  res.append("Access-Control-Allow-Origin", ["*", "localhost:3000", "null"]);
+  res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.append("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 app.use(express.json());
 app.use(userRouter);
