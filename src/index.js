@@ -10,10 +10,7 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.use(
-  cors(cors({ origin: 'null', credentials: true }
-  })
-);
+app.use(cors({ origin: "null", credentials: true }));
 
 app.use(express.json());
 app.use(userRouter);
