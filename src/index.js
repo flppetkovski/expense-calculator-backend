@@ -10,9 +10,7 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.use(
-  cors({ origin: ["*", "null", "http://localhost:3000/", "localhost:3000/"] })
-);
+app.use(cors({ origin: "*" }));
 
 app.use(express.json());
 app.use(userRouter);
