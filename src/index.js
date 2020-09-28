@@ -14,6 +14,7 @@ app.use(
     origin: [
       "https://petkovski-expense-calculator.netlify.app",
       "https://petkovski-expense-calculator.netlify.app/users/me/avatar",
+      "http://localhost:3000",
     ],
     credentials: true,
   })
