@@ -4,6 +4,7 @@ const router = new express.Router();
 const auth = require("../middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
+const cors = require("cors");
 
 router.post("/users", async (req, res) => {
   const user = new User(req.body);
@@ -114,8 +115,11 @@ const upload = multer({
   },
 });
 
+router.options("/users/me/avatar", cors({ origin: "null" }));
+
 router.post(
   "/users/me/avatar",
+  cors(),
   auth,
   upload.single("avatar"),
   async (req, res) => {
