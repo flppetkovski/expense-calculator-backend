@@ -116,8 +116,6 @@ const upload = multer({
 });
 
 router.post(
-  res.header("Access-Control-Allow-Origin", "*"),
-  "/users/me/avatar",
   auth,
   upload.single("avatar"),
   async (req, res) => {
