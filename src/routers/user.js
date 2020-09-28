@@ -116,6 +116,7 @@ const upload = multer({
 });
 
 router.post(
+  res.set(("origin", "null")),
   "/users/me/avatar",
   auth,
   upload.single("avatar"),
@@ -137,7 +138,6 @@ router.post(
 );
 
 router.delete("/users/me/avatar", auth, async (req, res) => {
-  res.set(("origin", "null"));
   req.user.avatar = undefined;
   await req.user.save();
   res.send();
