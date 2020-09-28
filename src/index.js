@@ -12,7 +12,6 @@ const port = process.env.PORT;
 app.use(
   cors({
     origin: [
-      "*",
       "https://petkovski-expense-calculator.netlify.app",
       "https://petkovski-expense-calculator.netlify.app/users/me/avatar",
     ],
