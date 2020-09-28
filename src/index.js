@@ -9,7 +9,13 @@ const productRouter = require("./routers/product");
 const app = express();
 
 const port = process.env.PORT;
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: "*",
+    "Access-Control-Allow-Origin":
+      "https://petkovski-expense-calculator.netlify.app",
+  })
+);
 
 app.use(express.json());
 app.use(userRouter);
