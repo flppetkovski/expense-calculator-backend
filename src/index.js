@@ -4,8 +4,8 @@ const cors = require("cors");
 const express = require("express");
 
 app.use(function (req, res, next) {
-  var whitelist = ["localhost:4000", "localhost:3000", "anydomain.com"];
-  var host = req.get("host");
+  let whitelist = ["localhost:4000", "localhost:3000", "anydomain.com", "null"], ;
+  let host = req.get("host");
 
   whitelist.forEach(function (val, key) {
     if (host.indexOf(val) > -1) {
