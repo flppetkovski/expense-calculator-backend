@@ -12,8 +12,6 @@ const port = process.env.PORT;
 app.use(
   cors({
     origin: "*",
-    "Access-Control-Allow-Origin":
-      "https://petkovski-expense-calculator.netlify.app",
   })
 );
 

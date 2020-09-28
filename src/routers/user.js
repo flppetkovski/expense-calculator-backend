@@ -117,6 +117,10 @@ const upload = multer({
 
 router.post(
   "/users/me/avatar",
+  res.set(
+    ("Access-Control-Allow-Origin",
+    "https://petkovski-expense-calculator.netlify.app")
+  ),
   auth,
   upload.single("avatar"),
   async (req, res) => {
