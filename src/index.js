@@ -15,7 +15,6 @@ app.use(
       "https://petkovski-expense-calculator.netlify.app",
       "https://petkovski-expense-calculator.netlify.app/users/me/avatar",
     ],
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
