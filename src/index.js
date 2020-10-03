@@ -15,7 +15,9 @@ app.use(
       "https://petkovski-expense-calculator.netlify.app",
       "https://petkovski-expense-calculator.netlify.app/users/me/avatar",
       "http://localhost:3000",
+      /\.petkovski-expense-calculator.netlify.app\.com$/,
     ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
 );
